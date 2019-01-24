@@ -1,5 +1,8 @@
 # DoctrineExtensions/Tree
 
+![Build Status](https://api.travis-ci.org/DoctrineExtensions/Tree.svg?branch=master "Build Status")
+
+
 Tree extensions for Doctrine
 
 Note: this code is a part of the hard fork of 
