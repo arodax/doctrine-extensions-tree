@@ -1,0 +1,22 @@
+{
+    "name": "doctrine-extensions/tree",
+    "description": "Tree extension for DoctrineExtensions",
+    "type": "library",
+    "require": {
+        "doctrine-extensions/common": "^1.0.0",
+        "php": "^7.2"
+    },
+    "support": {
+        "source": "https://github.com/DoctrineExtensions/tree.git"
+    },
+    "autoload": {
+        "psr-4": { "DoctrineExtensions\\Tree\\": "src/DoctrineExtensions/Tree" }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Chodusov",
+            "email": "daniel@chodusov.com"
+        }
+    ]
+}
