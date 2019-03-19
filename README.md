@@ -10,6 +10,10 @@ Note: this code is a part of the hard fork of
 
 LICENCE: MIT
 
+## Changelog
+
+1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
+
 ## Symfony integration
 There is no flex recipe yet, so you need to manually enable extension.
 
