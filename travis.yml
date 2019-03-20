@@ -1,3 +1,29 @@
 language: php
-php:
-    - 7.2
+
+matrix:
+    include:
+        - php: 7.2
+        - php: 7.3
+
+cache:
+    directories:
+        - $HOME/.composer/cache
+
+before_script:
+    - if [[ $COVERAGE == "" ]]; then phpenv config-rm xdebug.ini; fi
+
+after_script:
+    - |
+        if [[ $COVERAGE == true && $TRAVIS_BRANCH == "master" ]]; then
+          vendor/bin/phpunit --coverage-clover coverage.xml
+          wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
+          php php-coveralls.phar --verbose
+        fi
+
+before_install:
+    - date
+    - export TZ=Europe/Prague
+    - date
+
+install:
+    - composer install --no-interaction
