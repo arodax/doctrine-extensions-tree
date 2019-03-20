@@ -6,10 +6,10 @@
  * (c) ARODAX  <info@arodax.com>
  *
  * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.*
+ * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Traits;
 
@@ -17,37 +17,44 @@ use Doctrine\ORM\Mapping as ORM;
 use DoctrineExtensions\Tree\Mapping\Annotation as Tree;
 
 /**
- * NestedSet Trait, usable with PHP >= 5.4
+ * NestedSet Trait.
  *
  * @author Renaat De Muynck <renaat.demuynck@gmail.com>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 trait NestedSetEntityTrait
 {
     /**
-     * @var integer
+     * @var int
+     *
      * @Tree\TreeRoot
+     *
      * @ORM\Column(name="root", type="integer", nullable=true)
      */
     private $root;
 
     /**
-     * @var integer
+     * @var int
+     *
      * @Tree\TreeLevel
+     *
      * @ORM\Column(name="lvl", type="integer")
      */
     private $level;
 
     /**
-     * @var integer
+     * @var int
+     *
      * @Tree\TreeLeft
+     *
      * @ORM\Column(name="lft", type="integer")
      */
     private $left;
 
     /**
-     * @var integer
+     * @var int
+     *
      * @Tree\TreeRight
+     *
      * @ORM\Column(name="rgt", type="integer")
      */
     private $right;

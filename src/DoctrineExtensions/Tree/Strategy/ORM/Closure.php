@@ -6,10 +6,10 @@
  * (c) ARODAX  <info@arodax.com>
  *
  * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.*
+ * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Strategy\ORM;
 
@@ -26,47 +26,42 @@ use DoctrineExtensions\Tree\Exception\RuntimeException;
 use DoctrineExtensions\Common\Mapping\Event\AdapterInterface;
 
 /**
- * This strategy makes tree act like
- * a closure table.
+ * This strategy makes tree act like a closure table.
  *
  * @author Gustavo Adrian <comfortablynumb84@gmail.com>
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 class Closure implements StrategyInterface
 {
     /**
-     * TreeSubscriber
+     * TreeSubscriber.
      *
      * @var TreeSubscriber
      */
     protected $listener = null;
 
     /**
-     * List of pending Nodes, which needs to
-     * be post processed because of having a parent Node
-     * which requires some additional calculations
+     * List of pending Nodes, which needs to be post processed because of having a parent Node which requires some
+     * additional calculations.
      *
      * @var array
      */
-    private $pendingChildNodeInserts = array();
+    private $pendingChildNodeInserts = [];
 
     /**
-     * List of nodes which has their parents updated, but using
-     * new nodes. They have to wait until their parents are inserted
-     * on DB to make the update
+     * List of nodes which has their parents updated, but using new nodes. They have to wait until their parents
+     * are inserted on DB to make the update.
      *
      * @var array
      */
-    private $pendingNodeUpdates = array();
+    private $pendingNodeUpdates = [];
 
     /**
-     * List of pending Nodes, which needs their "level"
-     * field value set
+     * List of pending Nodes, which needs their "level" field value set.
      *
      * @var array
      */
-    private $pendingNodesLevelProcess = array();
+    private $pendingNodesLevelProcess = [];
 
     /**
      * {@inheritdoc}
@@ -79,13 +74,15 @@ class Closure implements StrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return StrategyInterface::CLOSURE;
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processMetadataLoad($em, $meta)
     {
@@ -95,11 +92,11 @@ class Closure implements StrategyInterface
 
         if (!$closureMetadata->hasAssociation('ancestor')) {
             // create ancestor mapping
-            $ancestorMapping = array(
+            $ancestorMapping = [
                 'fieldName' => 'ancestor',
                 'id' => false,
-                'joinColumns' => array(
-                    array(
+                'joinColumns' => [
+                    [
                         'name' => 'ancestor',
                         'referencedColumnName' => 'id',
                         'unique' => false,
@@ -107,13 +104,13 @@ class Closure implements StrategyInterface
                         'onDelete' => 'CASCADE',
                         'onUpdate' => null,
                         'columnDefinition' => null,
-                    ),
-                ),
+                    ],
+                ],
                 'inversedBy' => null,
                 'targetEntity' => $meta->name,
                 'cascade' => null,
                 'fetch' => ClassMetadataInfo::FETCH_LAZY,
-            );
+            ];
             $closureMetadata->mapManyToOne($ancestorMapping);
             if (Version::compare('2.3.0-dev') <= 0) {
                 $closureMetadata->reflFields['ancestor'] = $cmf
@@ -125,11 +122,11 @@ class Closure implements StrategyInterface
 
         if (!$closureMetadata->hasAssociation('descendant')) {
             // create descendant mapping
-            $descendantMapping = array(
+            $descendantMapping = [
                 'fieldName' => 'descendant',
                 'id' => false,
-                'joinColumns' => array(
-                    array(
+                'joinColumns' => [
+                    [
                         'name' => 'descendant',
                         'referencedColumnName' => 'id',
                         'unique' => false,
@@ -137,13 +134,13 @@ class Closure implements StrategyInterface
                         'onDelete' => 'CASCADE',
                         'onUpdate' => null,
                         'columnDefinition' => null,
-                    ),
-                ),
+                    ],
+                ],
                 'inversedBy' => null,
                 'targetEntity' => $meta->name,
                 'cascade' => null,
                 'fetch' => ClassMetadataInfo::FETCH_LAZY,
-            );
+            ];
             $closureMetadata->mapManyToOne($descendantMapping);
             if (Version::compare('2.3.0-dev') <= 0) {
                 $closureMetadata->reflFields['descendant'] = $cmf
@@ -153,20 +150,22 @@ class Closure implements StrategyInterface
             }
         }
         // create unique index on ancestor and descendant
-        $indexName = substr(strtoupper("IDX_".md5($closureMetadata->name)), 0, 20);
-        $closureMetadata->table['uniqueConstraints'][$indexName] = array(
-            'columns' => array(
+        $indexName = substr(strtoupper('IDX_'.md5($closureMetadata->name)), 0, 20);
+        $closureMetadata->table['uniqueConstraints'][$indexName] = [
+            'columns' => [
                 $this->getJoinColumnFieldName($em->getClassMetadata($config['closure'])->getAssociationMapping('ancestor')),
                 $this->getJoinColumnFieldName($em->getClassMetadata($config['closure'])->getAssociationMapping('descendant')),
-            ),
-        );
+            ],
+        ];
+
         // this one may not be very useful
-        $indexName = substr(strtoupper("IDX_".md5($meta->name.'depth')), 0, 20);
-        $closureMetadata->table['indexes'][$indexName] = array(
-            'columns' => array('depth'),
-        );
+        $indexName = substr(strtoupper('IDX_'.md5($meta->name.'depth')), 0, 20);
+        $closureMetadata->table['indexes'][$indexName] = [
+            'columns' => ['depth'],
+        ];
+
         if ($cacheDriver = $cmf->getCacheDriver()) {
-            $cacheDriver->save($closureMetadata->name."\$CLASSMETADATA", $closureMetadata, null);
+            $cacheDriver->save($closureMetadata->name.'$CLASSMETADATA', $closureMetadata, null);
         }
     }
 
@@ -224,6 +223,9 @@ class Closure implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \DoctrineExtensions\Common\Exception\UnsupportedObjectManagerException
      */
     public function processPostUpdate($em, $entity, AdapterInterface $ea)
     {
@@ -245,6 +247,15 @@ class Closure implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param $em
+     * @param $entity
+     * @param AdapterInterface $ea
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \DoctrineExtensions\Common\Exception\UnsupportedObjectManagerException
      */
     public function processPostPersist($em, $entity, AdapterInterface $ea)
     {
@@ -267,35 +278,35 @@ class Closure implements StrategyInterface
             $descendantColumnName = $this->getJoinColumnFieldName($em->getClassMetadata($config['closure'])->getAssociationMapping('descendant'));
             $depthColumnName = $em->getClassMetadata($config['closure'])->getColumnName('depth');
 
-            $entries = array(
-                array(
+            $entries = [
+                [
                     $ancestorColumnName => $nodeId,
                     $descendantColumnName => $nodeId,
                     $depthColumnName => 0,
-                ),
-            );
+                ],
+            ];
 
             if ($parent) {
                 $dql = "SELECT c, a FROM {$closureMeta->name} c";
-                $dql .= " JOIN c.ancestor a";
-                $dql .= " WHERE c.descendant = :parent";
+                $dql .= ' JOIN c.ancestor a';
+                $dql .= ' WHERE c.descendant = :parent';
                 $q = $em->createQuery($dql);
                 $q->setParameters(compact('parent'));
                 $ancestors = $q->getArrayResult();
 
                 foreach ($ancestors as $ancestor) {
-                    $entries[] = array(
+                    $entries[] = [
                         $ancestorColumnName => $ancestor['ancestor'][$identifier],
                         $descendantColumnName => $nodeId,
                         $depthColumnName => $ancestor['depth'] + 1,
-                    );
+                    ];
                 }
 
                 if (isset($config['level'])) {
                     $this->pendingNodesLevelProcess[$nodeId] = $node;
                 }
             } elseif (isset($config['level'])) {
-                $uow->scheduleExtraUpdate($node, array($config['level'] => array(null, 1)));
+                $uow->scheduleExtraUpdate($node, [$config['level'] => [null, 1]]);
                 $ea->setOriginalObjectProperty($uow, spl_object_hash($node), $config['level'], 1);
                 $levelProp = $meta->getReflectionProperty($config['level']);
                 $levelProp->setValue($node, 1);
@@ -314,7 +325,7 @@ class Closure implements StrategyInterface
                 $this->updateNode($em, $info['node'], $info['oldParent']);
             }
 
-            $this->pendingNodeUpdates = array();
+            $this->pendingNodeUpdates = [];
         }
 
         // Process TreeLevel field value
@@ -322,10 +333,12 @@ class Closure implements StrategyInterface
     }
 
     /**
-     * Process pending entities to set their "level" value
+     * Process pending entities to set their "level" value.
      *
      * @param \Doctrine\Common\Persistence\ObjectManager $em
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \DoctrineExtensions\Common\Exception\UnsupportedObjectManagerException
      */
     protected function setLevelFieldOnPendingNodes(ObjectManager $em)
     {
@@ -358,10 +371,11 @@ class Closure implements StrategyInterface
             $sql .= 'WHERE c.descendant IN (?) ';
             $sql .= 'GROUP BY c.descendant';
 
-            $levelsAssoc = $em->getConnection()->executeQuery($sql, array(array_keys($this->pendingNodesLevelProcess)), array($type))->fetchAll(\PDO::FETCH_NUM);
+            $levelsAssoc = $em->getConnection()->executeQuery($sql, [array_keys($this->pendingNodesLevelProcess)],
+                [$type])->fetchAll(\PDO::FETCH_NUM);
 
             //create key pair array with resultset
-            $levels = array();
+            $levels = [];
             foreach ($levelsAssoc as $level) {
                 $levels[$level[0]] = $level[1];
             }
@@ -374,15 +388,15 @@ class Closure implements StrategyInterface
                 $levelProp = $meta->getReflectionProperty($config['level']);
                 $uow->scheduleExtraUpdate(
                     $node,
-                    array($config['level'] => array(
+                    [$config['level'] => [
                         $levelProp->getValue($node), $level,
-                    ))
+                    ]]
                 );
                 $levelProp->setValue($node, $level);
                 $uow->setOriginalEntityProperty(spl_object_hash($node), $config['level'], $level);
             }
 
-            $this->pendingNodesLevelProcess = array();
+            $this->pendingNodesLevelProcess = [];
         }
     }
 
@@ -402,10 +416,10 @@ class Closure implements StrategyInterface
             $parent = $changeSet[$config['parent']][1] ? AbstractWrapper::wrap($changeSet[$config['parent']][1], $em) : null;
 
             if ($parent && !$parent->getIdentifier()) {
-                $this->pendingNodeUpdates[spl_object_hash($node)] = array(
-                    'node'      => $node,
+                $this->pendingNodeUpdates[spl_object_hash($node)] = [
+                    'node' => $node,
                     'oldParent' => $changeSet[$config['parent']][0],
-                );
+                ];
             } else {
                 $this->updateNode($em, $node, $changeSet[$config['parent']][0]);
             }
@@ -413,14 +427,16 @@ class Closure implements StrategyInterface
     }
 
     /**
-     * Update node and closures
+     * Update node and closures.
      *
      * @param EntityManagerInterface $em
      * @param object $node
      * @param object $oldParent
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \DoctrineExtensions\Common\Exception\UnsupportedObjectManagerException
      */
     public function updateNode(EntityManagerInterface $em, $node, $oldParent)
     {
@@ -436,8 +452,8 @@ class Closure implements StrategyInterface
         // ensure integrity
         if ($parent) {
             $dql = "SELECT COUNT(c) FROM {$closureMeta->name} c";
-            $dql .= " WHERE c.ancestor = :node";
-            $dql .= " AND c.descendant = :parent";
+            $dql .= ' WHERE c.ancestor = :node';
+            $dql .= ' AND c.descendant = :parent';
             $q = $em->createQuery($dql);
             $q->setParameters(compact('node', 'parent'));
             if ($q->getSingleScalarResult()) {
@@ -448,12 +464,12 @@ class Closure implements StrategyInterface
         if ($oldParent) {
             $subQuery = "SELECT c2.id FROM {$table} c1";
             $subQuery .= " JOIN {$table} c2 ON c1.descendant = c2.descendant";
-            $subQuery .= " WHERE c1.ancestor = :nodeId AND c2.depth > c1.depth";
+            $subQuery .= ' WHERE c1.ancestor = :nodeId AND c2.depth > c1.depth';
 
             $ids = $conn->executeQuery($subQuery, compact('nodeId'))->fetchAll(\PDO::FETCH_COLUMN);
             if ($ids) {
                 // using subquery directly, sqlite acts unfriendly
-                $query = "DELETE FROM {$table} WHERE id IN (".implode(', ', $ids).")";
+                $query = "DELETE FROM {$table} WHERE id IN (".implode(', ', $ids).')';
                 if (!empty($ids) && !$conn->executeQuery($query)) {
                     throw new RuntimeException('Failed to remove old closures');
                 }
@@ -463,10 +479,10 @@ class Closure implements StrategyInterface
         if ($parent) {
             $wrappedParent = AbstractWrapper::wrap($parent, $em);
             $parentId = $wrappedParent->getIdentifier();
-            $query = "SELECT c1.ancestor, c2.descendant, (c1.depth + c2.depth + 1) AS depth";
+            $query = 'SELECT c1.ancestor, c2.descendant, (c1.depth + c2.depth + 1) AS depth';
             $query .= " FROM {$table} c1, {$table} c2";
-            $query .= " WHERE c1.descendant = :parentId";
-            $query .= " AND c2.ancestor = :nodeId";
+            $query .= ' WHERE c1.descendant = :parentId';
+            $query .= ' AND c2.ancestor = :nodeId';
 
             $closures = $conn->fetchAll($query, compact('nodeId', 'parentId'));
 

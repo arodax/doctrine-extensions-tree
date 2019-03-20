@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Strategy;
 
@@ -22,14 +22,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ODM\MongoDB\UnitOfWork as MongoDBUnitOfWork;
 
 /**
- * This strategy makes tree using materialized path strategy
+ * This strategy makes tree using materialized path strategy.
  *
  * @author Gustavo Falco <comfortablynumb84@gmail.com>
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @author <rocco@roccosportal.com>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
 abstract class AbstractMaterializedPath implements StrategyInterface
 {
     const ACTION_INSERT = 'insert';
@@ -37,55 +35,55 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     const ACTION_REMOVE = 'remove';
 
     /**
-     * TreeSubscriber
+     * TreeSubscriber.
      *
      * @var TreeSubscriber
      */
     protected $listener = null;
 
     /**
-     * Array of objects which were scheduled for path processes
+     * Array of objects which were scheduled for path processes.
      *
      * @var array
      */
-    protected $scheduledForPathProcess = array();
+    protected $scheduledForPathProcess = [];
 
     /**
      * Array of objects which were scheduled for path process.
      * This time, this array contains the objects with their ID
-     * already set
+     * already set.
      *
      * @var array
      */
-    protected $scheduledForPathProcessWithIdSet = array();
+    protected $scheduledForPathProcessWithIdSet = [];
 
     /**
-     * Roots of trees which needs to be locked
+     * Roots of trees which needs to be locked.
      *
      * @var array
      */
-    protected $rootsOfTreesWhichNeedsLocking = array();
+    protected $rootsOfTreesWhichNeedsLocking = [];
 
     /**
-     * Objects which are going to be inserted (set only if tree locking is used)
+     * Objects which are going to be inserted (set only if tree locking is used).
      *
      * @var array
      */
-    protected $pendingObjectsToInsert = array();
+    protected $pendingObjectsToInsert = [];
 
     /**
-     * Objects which are going to be updated (set only if tree locking is used)
+     * Objects which are going to be updated (set only if tree locking is used).
      *
      * @var array
      */
-    protected $pendingObjectsToUpdate = array();
+    protected $pendingObjectsToUpdate = [];
 
     /**
-     * Objects which are going to be removed (set only if tree locking is used)
+     * Objects which are going to be removed (set only if tree locking is used).
      *
      * @var array
      */
-    protected $pendingObjectsToRemove = array();
+    protected $pendingObjectsToRemove = [];
 
     /**
      * {@inheritdoc}
@@ -100,11 +98,13 @@ abstract class AbstractMaterializedPath implements StrategyInterface
      */
     public function getName()
     {
-        return Strategy::MATERIALIZED_PATH;
+        return StrategyInterface::MATERIALIZED_PATH;
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processScheduledInsertion($om, $node, AdapterInterface $ea)
     {
@@ -112,7 +112,7 @@ abstract class AbstractMaterializedPath implements StrategyInterface
         $config = $this->listener->getConfiguration($om, $meta->name);
         $fieldMapping = $meta->getFieldMapping($config['path_source']);
 
-        if ($meta->isIdentifier($config['path_source']) || $fieldMapping['type'] === 'string') {
+        if ($meta->isIdentifier($config['path_source']) || 'string' === $fieldMapping['type']) {
             $this->scheduledForPathProcess[spl_object_hash($node)] = $node;
         } else {
             $this->updateNode($om, $node, $ea);
@@ -121,6 +121,8 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processScheduledUpdate($om, $node, AdapterInterface $ea)
     {
@@ -145,6 +147,8 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processPostPersist($om, $node, AdapterInterface $ea)
     {
@@ -169,6 +173,8 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processPostUpdate($om, $node, AdapterInterface $ea)
     {
@@ -177,6 +183,8 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processPostRemove($om, $node, AdapterInterface $ea)
     {
@@ -193,6 +201,12 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param $om
+     * @param $node
+     * @throws TreeLockingException
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \ReflectionException
      */
     public function processPreRemove($om, $node)
     {
@@ -201,6 +215,12 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     * 
+     * @param $om
+     * @param $node
+     * @throws TreeLockingException
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \ReflectionException
      */
     public function processPrePersist($om, $node)
     {
@@ -209,6 +229,12 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param $om
+     * @param $node
+     * @throws TreeLockingException
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \ReflectionException
      */
     public function processPreUpdate($om, $node)
     {
@@ -224,6 +250,8 @@ abstract class AbstractMaterializedPath implements StrategyInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function processScheduledDelete($om, $node)
     {
@@ -234,13 +262,12 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Update the $node
+     * Update the $node.
      *
-     * @param ObjectManager $om
-     * @param object $node - target node
-     * @param AdapterInterface $ea - event adapter
+     * @param ObjectManager    $om
+     * @param object           $node - target node
+     * @param AdapterInterface $ea   - event adapter
      *
-     * @return void
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function updateNode(ObjectManager $om, $node, AdapterInterface $ea)
@@ -259,7 +286,7 @@ abstract class AbstractMaterializedPath implements StrategyInterface
         $path = $pathSourceProp->getValue($node);
 
         // We need to avoid the presence of the path separator in the path source
-        if (strpos($path, $config['path_separator']) !== false) {
+        if (false !== strpos($path, $config['path_separator'])) {
             $msg = 'You can\'t use the TreePath separator ("%s") as a character for your PathSource field value.';
 
             throw new RuntimeException(sprintf($msg, $config['path_separator']));
@@ -270,7 +297,7 @@ abstract class AbstractMaterializedPath implements StrategyInterface
         // default behavior: if PathSource field is a string, we append the ID to the path
         // path_append_id is true: always append id
         // path_append_id is false: never append id
-        if ($config['path_append_id'] === true || ($fieldMapping['type'] === 'string' && $config['path_append_id'] !== false)) {
+        if (true === $config['path_append_id'] || ('string' === $fieldMapping['type'] && false !== $config['path_append_id'])) {
             if (method_exists($meta, 'getIdentifierValue')) {
                 $identifier = $meta->getIdentifierValue($node);
             } else {
@@ -313,16 +340,16 @@ abstract class AbstractMaterializedPath implements StrategyInterface
         }
 
         $pathProp->setValue($node, $path);
-        $changes = array(
-            $config['path'] => array(null, $path),
-        );
+        $changes = [
+            $config['path'] => [null, $path],
+        ];
 
         if (isset($config['path_hash'])) {
             $pathHash = md5($path);
             $pathHashProp = $meta->getReflectionProperty($config['path_hash']);
             $pathHashProp->setAccessible(true);
             $pathHashProp->setValue($node, $pathHash);
-            $changes[$config['path_hash']] = array(null, $pathHash);
+            $changes[$config['path_hash']] = [null, $pathHash];
         }
 
         if (isset($config['root'])) {
@@ -343,7 +370,7 @@ abstract class AbstractMaterializedPath implements StrategyInterface
             $rootProp = $meta->getReflectionProperty($config['root']);
             $rootProp->setAccessible(true);
             $rootProp->setValue($node, $root);
-            $changes[$config['root']] = array(null, $root);
+            $changes[$config['root']] = [null, $root];
         }
 
         if (isset($config['level'])) {
@@ -351,7 +378,7 @@ abstract class AbstractMaterializedPath implements StrategyInterface
             $levelProp = $meta->getReflectionProperty($config['level']);
             $levelProp->setAccessible(true);
             $levelProp->setValue($node, $level);
-            $changes[$config['level']] = array(null, $level);
+            $changes[$config['level']] = [null, $level];
         }
 
         if (!$uow instanceof MongoDBUnitOfWork) {
@@ -366,14 +393,13 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Update node's children
+     * Update node's children.
      *
-     * @param ObjectManager $om
-     * @param object $node
+     * @param ObjectManager    $om
+     * @param object           $node
      * @param AdapterInterface $ea
-     * @param string $originalPath
+     * @param string           $originalPath
      *
-     * @return void
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function updateChildren(ObjectManager $om, $node, AdapterInterface $ea, $originalPath)
@@ -388,13 +414,12 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Process pre-locking actions
+     * Process pre-locking actions.
      *
      * @param ObjectManager $om
-     * @param object $node
-     * @param string $action
+     * @param object        $node
+     * @param string        $action
      *
-     * @return void
      * @throws InvalidArgumentException
      * @throws TreeLockingException
      * @throws \Doctrine\Common\Annotations\AnnotationException
@@ -406,7 +431,6 @@ abstract class AbstractMaterializedPath implements StrategyInterface
         $config = $this->listener->getConfiguration($om, $meta->name);
 
         if ($config['activate_locking']) {
-            ;
             $parentProp = $meta->getReflectionProperty($config['parent']);
             $parentProp->setAccessible(true);
             $parentNode = $node;
@@ -465,14 +489,13 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Process pre-locking actions
+     * Process pre-locking actions.
      *
-     * @param ObjectManager $om
+     * @param ObjectManager    $om
      * @param AdapterInterface $ea
-     * @param object $node
-     * @param string $action
+     * @param object           $node
+     * @param string           $action
      *
-     * @return void
      * @throws InvalidArgumentException
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
@@ -507,12 +530,10 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Locks all needed trees
+     * Locks all needed trees.
      *
      * @param ObjectManager    $om
      * @param AdapterInterface $ea
-     *
-     * @return void
      */
     protected function lockTrees(ObjectManager $om, AdapterInterface $ea)
     {
@@ -520,12 +541,10 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Releases all trees which are locked
+     * Releases all trees which are locked.
      *
      * @param ObjectManager    $om
      * @param AdapterInterface $ea
-     *
-     * @return void
      */
     protected function releaseTreeLocks(ObjectManager $om, AdapterInterface $ea)
     {
@@ -533,19 +552,17 @@ abstract class AbstractMaterializedPath implements StrategyInterface
     }
 
     /**
-     * Remove node and its children
+     * Remove node and its children.
      *
      * @param ObjectManager $om
      * @param object        $meta   - Metadata
      * @param object        $config - config
      * @param object        $node   - node to remove
-     *
-     * @return void
      */
     abstract public function removeNode($om, $meta, $config, $node);
 
     /**
-     * Returns children of the node with its original path
+     * Returns children of the node with its original path.
      *
      * @param ObjectManager $om
      * @param object        $meta         - Metadata

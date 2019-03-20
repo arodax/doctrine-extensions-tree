@@ -6,10 +6,10 @@
  * (c) ARODAX  <info@arodax.com>
  *
  * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.*
+ * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Traits;
 
@@ -17,10 +17,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * MaterializedPath Trait
+ * MaterializedPath Trait.
  *
  * @author Steffen Roßkamp <steffen.rosskamp@gimmickmedia.de>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 trait MaterializedPathTrait
 {
@@ -28,29 +27,33 @@ trait MaterializedPathTrait
      * @var string
      */
     protected $path;
+
     /**
      * @var self
      */
     protected $parent;
+
     /**
-     * @var integer
+     * @var int
      */
     protected $level;
+
     /**
      * @var Collection|self[]
      */
     protected $children;
+
     /**
      * @var string
      */
     protected $hash;
 
     /**
-     * @param self $parent
+     * @param self|null $parent
      *
-     * @return self
+     * @return MaterializedPathTrait
      */
-    public function setParent(self $parent = null)
+    public function setParent(self $parent = null): self
     {
         $this->parent = $parent;
 
@@ -70,7 +73,7 @@ trait MaterializedPathTrait
      *
      * @return self
      */
-    public function setPath($path)
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
@@ -86,9 +89,9 @@ trait MaterializedPathTrait
     }
 
     /**
-     * @return integer
+     * @return int
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         return $this->level;
     }
@@ -98,7 +101,7 @@ trait MaterializedPathTrait
      *
      * @return self
      */
-    public function setHash($hash)
+    public function setHash(string $hash)
     {
         $this->hash = $hash;
 
@@ -118,7 +121,7 @@ trait MaterializedPathTrait
      *
      * @return self
      */
-    public function setChildren($children)
+    public function setChildren($children): self
     {
         $this->children = $children;
 

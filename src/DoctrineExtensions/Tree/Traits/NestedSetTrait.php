@@ -6,39 +6,37 @@
  * (c) ARODAX  <info@arodax.com>
  *
  * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.*
+ * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Traits;
 
 /**
- * NestedSet Trait, usable with PHP >= 5.4
+ * NestedSet Trait.
  *
  * @author Renaat De Muynck <renaat.demuynck@gmail.com>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 trait NestedSetTrait
 {
-
     /**
-     * @var integer
+     * @var int
      */
     private $root;
 
     /**
-     * @var integer
+     * @var int
      */
     private $level;
 
     /**
-     * @var integer
+     * @var int
      */
     private $left;
 
     /**
-     * @var integer
+     * @var int
      */
     private $right;
 }

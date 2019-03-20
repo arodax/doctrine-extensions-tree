@@ -6,10 +6,10 @@
  * (c) ARODAX  <info@arodax.com>
  *
  * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.*
+ * file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace DoctrineExtensions\Tree\Strategy\ORM;
 
@@ -17,11 +17,10 @@ use DoctrineExtensions\Tree\Strategy\AbstractMaterializedPath;
 use DoctrineExtensions\Common\Wrapper\AbstractWrapper;
 
 /**
- * This strategy makes tree using materialized path strategy
+ * This strategy makes tree using materialized path strategy.
  *
  * @author Gustavo Falco <comfortablynumb84@gmail.com>
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
- * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 class MaterializedPath extends AbstractMaterializedPath
 {
@@ -45,7 +44,7 @@ class MaterializedPath extends AbstractMaterializedPath
             $lvlField = $config['level'];
             $lvl = $wrapped->getPropertyValue($lvlField);
             if (!empty($lvl)) {
-                $qb->andWhere($qb->expr()->gt('e.' . $lvlField, $qb->expr()->literal($lvl)));
+                $qb->andWhere($qb->expr()->gt('e.'.$lvlField, $qb->expr()->literal($lvl)));
             }
         }
 
