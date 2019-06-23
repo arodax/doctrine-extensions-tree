@@ -439,7 +439,7 @@ class NestedTreeRepository extends AbstractTreeRepository
             $qb->setParameter('pid', $wrappedParent->getIdentifier());
         } elseif (isset($config['root']) && !$parent) {
             $qb->andWhere($qb->expr()->eq('node.'.$config['root'], ':root'));
-            $qb->andWhere($qb->expr()->isNull('node.parent'));
+            $qb->andWhere($qb->expr()->isNull('node.'.$config['parent']));
             $method = $config['rootIdentifierMethod'];
             $qb->setParameter('root', $node->$method());
         } else {
@@ -517,7 +517,7 @@ class NestedTreeRepository extends AbstractTreeRepository
             $qb->setParameter('pid', $wrappedParent->getIdentifier());
         } elseif (isset($config['root']) && !$parent) {
             $qb->andWhere($qb->expr()->eq('node.'.$config['root'], ':root'));
-            $qb->andWhere($qb->expr()->isNull('node.parent'));
+            $qb->andWhere($qb->expr()->isNull('node.'.$config['parent']));
             $method = $config['rootIdentifierMethod'];
             $qb->setParameter('root', $node->$method());
         } else {

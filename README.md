@@ -11,8 +11,9 @@ Note: this code is a part of the hard fork of
 LICENCE: MIT
 
 ## Changelog
-
-1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
+- 1.0.3 Implementation of [#2020](https://github.com/Atlantic18/DoctrineExtensions/pull/2020) removed instances of hard coded parent column in queries
+- 1.0.2 Added missing repositories from the original extension
+- 1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
 
 ## Symfony integration
 There is no flex recipe yet, so you need to manually enable extension.
