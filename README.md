@@ -1,14 +1,20 @@
-# DoctrineExtensions/Tree
+# Hierarchical Tree extension for Doctrine
 
-![Build Status](https://api.travis-ci.org/DoctrineExtensions/Tree.svg?branch=master "Build Status")
+![Licence MIT](https://img.shields.io/packagist/l/doctrine-extensions/tree?style=flat)
+![Build Status](https://api.travis-ci.org/DoctrineExtensions/Tree.svg?branch=master&style=flat "Build Status")
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&color=orange)
+![downloads total](https://img.shields.io/packagist/dt/doctrine-extensions/tree?color=blue&style=flat)
 
-
-Tree extensions for Doctrine
+This extension allows you to store your data in hierarchicaly in your database using Doctrine ORM.
 
 Note: this code is a part of the hard fork of 
-[Atlantic18/DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions).
+[Atlantic18/DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) 2.4.x branch. The goal of this repository is to split original extensions into small packages, each package responsible for the single task. 
 
-LICENCE: MIT
+Any fixes to the original tree code will be applied to this package whenever aplicable, see the changelog for for more information.
+
+## Licence
+
+MIT
 
 ## Changelog
 - 1.0.3 Implementation of [#2020](https://github.com/Atlantic18/DoctrineExtensions/pull/2020) removed instances of hard coded parent column in queries
