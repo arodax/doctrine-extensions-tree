@@ -21,10 +21,14 @@ MIT
 - 1.0.2 Added missing repositories from the original extension
 - 1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
 
-## Symfony integration
-There is no flex recipe yet, so you need to manually enable extension.
+## Installation
+Install the extension with the [composer](https://getcomposer.org)
 
-### Enable entity mappings
+`composer require doctrine-extensions/tree`
+
+### Using in the Symfony project
+There is no flex recipe yet, so you need to manually enable extension by adding the following into your configuration files
+
 **config/packages/doctrine.yaml**
 ```yaml
 parameters:
@@ -43,7 +47,6 @@ doctrine:
                 prefix: 'DoctrineExtensions\Tree\Entity'
 ```
 
-### Enable event subscriber
 **config/services/doctrine.yaml**
 
 ```yaml
@@ -60,11 +63,9 @@ services:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
 ```
 
-### Usage
+## Prepare entity for the hierarchical tree
 
-#### Nested tree strategy
-
-Annotate your entity:
+### Annotate your entity:
 
 ```php
 <?php
@@ -129,7 +130,9 @@ class Category
     private $children;
 ```
 
-Extend your entity repository:
+### Extend the repository
+
+Extend your entity repository from `DoctrineExtensions\Tree\Entity\Repository\NestedTreeRepository` this allows you to use special methods for working with the tree:
 
 ```php
 <?php
@@ -146,12 +149,15 @@ class MenuItemRepository extends NestedTreeRepository
 
 ```
 
-#### Saving tree
+## Usage
+
+### Saving tree
 
 Save some categories:
 
 ```php
 <?php
+
 $food = new Category();
 $food->setTitle('Food');
 
@@ -183,10 +189,36 @@ food (1-8)
         /carrots (5-6)
 ```
 
-#### Using repository functions
+### Inserting node in different positions      
+```php      
+<?php
+
+$food = new Category();
+$food->setTitle('Food');
+
+$fruits = new Category();
+$fruits->setTitle('Fruits');
+
+$vegetables = new Category();
+$vegetables->setTitle('Vegetables');
+
+$carrots = new Category();
+$carrots->setTitle('Carrots');
+
+$treeRepository
+    ->persistAsFirstChild($food)
+    ->persistAsFirstChildOf($fruits, $food)
+    ->persistAsLastChildOf($vegetables, $food)
+    ->persistAsNextSiblingOf($carrots, $fruits);
+
+$em->flush();
+```
+
+### Using repository functions
 
 ```php
 <?php
+
 $repo = $em->getRepository('Entity\Category');
 
 $food = $repo->findOneByTitle('Food');
@@ -228,30 +260,7 @@ $repo->reorder($food, 'title');
 // it will reorder all "Food" tree node left-right values by the title
 ```
 
-##### Inserting node in different positions      
-```php      
 
-<?php
-$food = new Category();
-$food->setTitle('Food');
-
-$fruits = new Category();
-$fruits->setTitle('Fruits');
-
-$vegetables = new Category();
-$vegetables->setTitle('Vegetables');
-
-$carrots = new Category();
-$carrots->setTitle('Carrots');
-
-$treeRepository
-    ->persistAsFirstChild($food)
-    ->persistAsFirstChildOf($fruits, $food)
-    ->persistAsLastChildOf($vegetables, $food)
-    ->persistAsNextSiblingOf($carrots, $fruits);
-
-$em->flush();
-```
 
 For more examples and usage check original package documentation:
 https://github.com/Atlantic18/DoctrineExtensions/blob/v2.4.x/doc/tree.md     
