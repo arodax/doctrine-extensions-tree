@@ -26,7 +26,7 @@ There is no flex recipe yet, so you need to manually enable extension.
 
 ### Enable entity mappings
 **config/packages/doctrine.yaml**
-```yam
+```yaml
 parameters:
     ...   
 doctrine:
