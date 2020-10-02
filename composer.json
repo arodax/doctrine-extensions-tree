@@ -1,5 +1,5 @@
 {
-    "name": "doctrine-extensions/tree",
+    "name": "arodax/doctrine-extensions-tree",
     "description": "Tree extension for DoctrineExtensions",
     "type": "library",
     "require": {
