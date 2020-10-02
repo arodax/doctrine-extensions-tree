@@ -18,7 +18,7 @@ use DoctrineExtensions\Tree\TreeSubscriber;
 use DoctrineExtensions\Tree\Exception\InvalidArgumentException;
 use DoctrineExtensions\Tree\Exception\RuntimeException;
 use DoctrineExtensions\Tree\Exception\TreeLockingException;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ODM\MongoDB\UnitOfWork as MongoDBUnitOfWork;
 
 /**

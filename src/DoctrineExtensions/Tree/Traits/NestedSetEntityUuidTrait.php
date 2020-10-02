@@ -21,7 +21,7 @@ use DoctrineExtensions\Tree\Mapping\Annotation as Tree;
  *
  * @author Benjamin Lazarecki <benjamin.lazarecki@sensiolabs.com>
  */
-trait NestedSetEntityUuid
+trait NestedSetEntityUuidTrait
 {
     use NestedSetEntityTrait;
 

@@ -15,7 +15,7 @@ namespace DoctrineExtensions\Tree\Strategy;
 
 use DoctrineExtensions\Common\Mapping\Event\AdapterInterface;
 use DoctrineExtensions\Tree\TreeSubscriber;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 interface StrategyInterface
 {

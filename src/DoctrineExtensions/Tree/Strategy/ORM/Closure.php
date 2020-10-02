@@ -17,7 +17,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Version;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use DoctrineExtensions\Tree\Exception\UnexpectedValueException;
 use DoctrineExtensions\Tree\Strategy\StrategyInterface;
 use DoctrineExtensions\Tree\TreeSubscriber;

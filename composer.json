@@ -3,15 +3,15 @@
     "description": "Tree extension for DoctrineExtensions",
     "type": "library",
     "require": {
-        "doctrine-extensions/common": "^1.0.0",
-        "php": "^7.2"
+        "doctrine-extensions/common": "^2.0.0",
+        "php": "^7.4"
     },
     "require-dev": {
-        "doctrine/orm": "^2.6",
+        "doctrine/orm": "^2.7",
         "phpunit/phpunit": "^8.0"
     },
     "support": {
-        "source": "https://github.com/DoctrineExtensions/tree.git"
+        "source": "https://github.com/arodax/doctrine-extensions-tree.git"
     },
     "autoload": {
         "psr-4": { "DoctrineExtensions\\Tree\\": "src/DoctrineExtensions/Tree" }

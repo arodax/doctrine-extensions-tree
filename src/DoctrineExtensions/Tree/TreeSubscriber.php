@@ -18,7 +18,7 @@ use DoctrineExtensions\Tree\Exception\UnexpectedValueException;
 use DoctrineExtensions\Common\Mapping\MappedEventSubscriber;
 use DoctrineExtensions\Tree\Strategy\StrategyInterface;
 use Doctrine\Common\EventArgs;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * The tree listener handles the synchronization of

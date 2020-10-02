@@ -13,20 +13,19 @@ declare(strict_types = 1);
 
 namespace DoctrineExtensions\Tree;
 
-use DoctrineExtensions\Tree\TreeSubscriber;
 use DoctrineExtensions\Tree\Exception\InvalidArgumentException;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\ObjectManager;
 
 class RepositoryUtils implements RepositoryUtilsInterface
 {
-    /** @var \Doctrine\Common\Persistence\Mapping\ClassMetadata */
+    /** @var \Doctrine\Persistence\Mapping\ClassMetadata */
     protected $meta;
 
     /** @var TreeSubscriber */
     protected $listener;
 
-    /** @var \Doctrine\Common\Persistence\ObjectManager */
+    /** @var \Doctrine\Persistence\ObjectManager */
     protected $om;
 
     /** @var RepositoryInterface */
