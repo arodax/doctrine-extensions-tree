@@ -1,7 +1,7 @@
 # Hierarchical Tree extension for Doctrine
 
-![Licence MIT](https://img.shields.io/packagist/l/doctrine-extensions/tree?style=flat)
-![Build Status](https://api.travis-ci.org/DoctrineExtensions/Tree.svg?branch=master&style=flat "Build Status")
+![Licence MIT](https://img.shields.io/packagist/l/arodax/doctrine-extensions-tree?style=flat)
+![Build Status](https://api.travis-ci.org/arodax/doctrine-extensions-tree.svg?branch=master&style=flat "Build Status")
 ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&color=orange)
 ![downloads total](https://img.shields.io/packagist/dt/doctrine-extensions/tree?color=blue&style=flat)
 
@@ -17,6 +17,18 @@ Any fixes to the original tree code will be applied to this package whenever apl
 MIT
 
 ## Changelog
+
+### Master branch
+
+- 3.0.0 Changed namespace to `Arodax\Doctrine\Extensions\Tree`, package has been renamed to `arodax/doctrine-extensions-tree`.
+Make sure you **change path and the namespace in config/packages/doctrine.yaml** - see installation guide bellow for the example!
+
+### 2.x branch
+
+- 2.0.0 Minimum compatible version of doctrine/common package has been increased to 3.0.*
+
+### 1.x branch
+
 - 1.0.3 Implementation of [#2020](https://github.com/Atlantic18/DoctrineExtensions/pull/2020) removed instances of hard coded parent column in queries
 - 1.0.2 Added missing repositories from the original extension
 - 1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
@@ -24,7 +36,7 @@ MIT
 ## Installation
 Install the extension with the [composer](https://getcomposer.org)
 
-`composer require doctrine-extensions/tree`
+`composer require arodax/doctrine-extensions-tree`
 
 ### Using in the Symfony project
 There is no flex recipe yet, so you need to manually enable extension by adding the following into your configuration files
@@ -40,11 +52,11 @@ doctrine:
         ...
         mappings:
             ...                
-            DoctrineExtensions\Tree:
+            Arodax\Doctrine\Extensions\Tree:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/vendor/doctrine-extensions/tree/src/DoctrineExtensions/Tree/Entity'
-                prefix: 'DoctrineExtensions\Tree\Entity'
+                dir: '%kernel.project_dir%/vendor/arodax/doctrine-extensions-tree/src/Entity'
+                prefix: 'Arodax\Doctrine\Extensions\Tree\Entity'
 ```
 
 **config/services/doctrine.yaml**
@@ -55,8 +67,8 @@ parameters:
 
 services:
     ...
-    DoctrineExtensions\Tree\TreeSubscriber:
-        class: DoctrineExtensions\Tree\TreeSubscriber
+    Arodax\Doctrine\Extensions\Tree\TreeSubscriber:
+        class: Arodax\Doctrine\Extensions\Tree\TreeSubscriber
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
@@ -73,7 +85,7 @@ services:
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use DoctrineExtensions\Tree\Mapping\Annotation as Tree;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation as Tree;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -132,7 +144,7 @@ class Category
 
 ### Extend the repository
 
-Extend your entity repository from `DoctrineExtensions\Tree\Entity\Repository\NestedTreeRepository` this allows you to use special methods for working with the tree:
+Extend your entity repository from `Arodax\Doctrine\Extensions\Tree\Entity\Repository\NestedTreeRepository` this allows you to use special methods for working with the tree:
 
 ```php
 <?php
@@ -140,7 +152,7 @@ Extend your entity repository from `DoctrineExtensions\Tree\Entity\Repository\Ne
 namespace App\Repository\Core\Menu;
 
 use App\Entity\Category;
-use DoctrineExtensions\Tree\Entity\Repository\NestedTreeRepository;
+use Arodax\Doctrine\Extensions\Tree\Entity\Repository\NestedTreeRepository;
 
 class MenuItemRepository extends NestedTreeRepository
 {

@@ -1,9 +1,9 @@
 {
     "name": "arodax/doctrine-extensions-tree",
-    "description": "Tree extension for DoctrineExtensions",
+    "description": "Tree extension for Doctrine",
     "type": "library",
     "require": {
-        "doctrine-extensions/common": "^2.0.0",
+        "arodax/doctrine-extensions-common": "^3.0.0",
         "php": "^7.4"
     },
     "require-dev": {
@@ -14,7 +14,9 @@
         "source": "https://github.com/arodax/doctrine-extensions-tree.git"
     },
     "autoload": {
-        "psr-4": { "DoctrineExtensions\\Tree\\": "src/DoctrineExtensions/Tree" }
+        "psr-4": {
+            "Arodax\\Doctrine\\Extensions\\Tree\\": "src"
+        }
     },
     "license": "MIT",
     "authors": [
