@@ -3,7 +3,7 @@
     "description": "Tree extension for Doctrine",
     "type": "library",
     "require": {
-        "arodax/doctrine-extensions-common": "^3.0.0",
+        "arodax/doctrine-extensions-common": "^3.0",
         "php": ">=7.4.0"
     },
     "require-dev": {
