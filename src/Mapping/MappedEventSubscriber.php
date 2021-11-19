@@ -13,7 +13,7 @@ declare(strict_types = 1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping;
 
-use Arodax\Doctrine\Extensions\Tree\Mapping\Event\TreeAdapterInterface as AdapterInterface;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Event\AdapterInterface;
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidArgumentException;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;

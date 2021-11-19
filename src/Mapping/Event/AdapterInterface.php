@@ -23,7 +23,7 @@ use Doctrine\ORM\UnitOfWork;
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-interface TreeAdapterInterface
+interface AdapterInterface
 {
     /**
      * Set the eventargs

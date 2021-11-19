@@ -14,7 +14,7 @@ declare(strict_types = 1);
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Event\Adapter;
 
 use Arodax\Doctrine\Extensions\Tree\Exception\RuntimeException;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Event\TreeAdapterInterface;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Event\AdapterInterface;
 use Doctrine\Common\EventArgs;
 
 /**
@@ -24,7 +24,7 @@ use Doctrine\Common\EventArgs;
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-final class ODM implements TreeAdapterInterface
+final class ODM implements AdapterInterface
 {
     /**
      * @var \Doctrine\Common\EventArgs
