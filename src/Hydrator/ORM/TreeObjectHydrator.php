@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Internal\Hydration\ObjectHydrator;
 use Arodax\Doctrine\Extensions\Tree\TreeSubscriber;
-use Arodax\Doctrine\Extensions\Common\Exception\InvalidMappingException;
+use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
 
 /**
  * Automatically maps the parent and children properties of Tree nodes

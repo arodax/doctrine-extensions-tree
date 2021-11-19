@@ -3,12 +3,14 @@
     "description": "Tree extension for Doctrine",
     "type": "library",
     "require": {
-        "arodax/doctrine-extensions-common": "^3.0",
         "php": ">=7.4.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.8",
         "phpunit/phpunit": "^8.0"
+    },
+    "config": {
+        "arodax/doctrine-extensions-common": "*"
     },
     "support": {
         "source": "https://github.com/arodax/doctrine-extensions-tree.git"

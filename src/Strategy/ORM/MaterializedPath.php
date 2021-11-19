@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Arodax\Doctrine\Extensions\Tree\Strategy\ORM;
 
 use Arodax\Doctrine\Extensions\Tree\Strategy\AbstractMaterializedPath;
-use Arodax\Doctrine\Extensions\Common\Wrapper\AbstractWrapper;
+use Arodax\Doctrine\Extensions\Tree\Wrapper\AbstractWrapper;
 
 /**
  * This strategy makes tree using materialized path strategy.

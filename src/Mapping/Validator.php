@@ -13,7 +13,7 @@ declare(strict_types = 1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping;
 
-use Arodax\Doctrine\Extensions\Common\Exception\InvalidMappingException;
+use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
 
 /**
  * This is a validator for all mapping drivers for Tree

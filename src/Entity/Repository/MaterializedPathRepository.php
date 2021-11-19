@@ -13,7 +13,7 @@ declare(strict_types = 1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Entity\Repository;
 
-use Arodax\Doctrine\Extensions\Common\Wrapper\EntityWrapper;
+use Arodax\Doctrine\Extensions\Tree\Wrapper\EntityWrapper;
 use Arodax\Doctrine\Extensions\Tree\Strategy\StrategyInterface;
 
 /**

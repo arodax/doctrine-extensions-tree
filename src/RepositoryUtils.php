@@ -62,8 +62,8 @@ class RepositoryUtils implements RepositoryUtilsInterface
         if ($node !== null) {
             if ($node instanceof $meta->name) {
                 $wrapperClass = $this->om instanceof \Doctrine\ORM\EntityManagerInterface ?
-                    '\Arodax\Doctrine\Extensions\Common\Wrapper\EntityWrapper' :
-                    '\Arodax\Doctrine\Extensions\Common\Wrapper\DocumentWrapper';
+                    '\Arodax\Doctrine\Extensions\Tree\Wrapper\EntityWrapper' :
+                    '\Arodax\Doctrine\Extensions\Tree\Wrapper\DocumentWrapper';
                 $wrapped = new $wrapperClass($node, $this->om);
                 if (!$wrapped->hasValidIdentifier()) {
                     throw new InvalidArgumentException("Node is not managed by UnitOfWork");

@@ -15,7 +15,7 @@ namespace Arodax\Doctrine\Extensions\Tree;
 
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidArgumentException;
 use Arodax\Doctrine\Extensions\Tree\Exception\UnexpectedValueException;
-use Arodax\Doctrine\Extensions\Common\Mapping\MappedEventSubscriber;
+use Arodax\Doctrine\Extensions\Tree\Mapping\MappedEventSubscriber;
 use Arodax\Doctrine\Extensions\Tree\Strategy\StrategyInterface;
 use Doctrine\Common\EventArgs;
 use Doctrine\Persistence\ObjectManager;

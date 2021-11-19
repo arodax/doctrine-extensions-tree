@@ -13,9 +13,9 @@ declare(strict_types = 1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
-use Arodax\Doctrine\Extensions\Common\Mapping\Driver\AbstractFile;
-use Arodax\Doctrine\Extensions\Common\Mapping\Driver\DriverInterface;
-use Arodax\Doctrine\Extensions\Common\Exception\InvalidMappingException;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Driver\AbstractFile;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Driver\DriverInterface;
+use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
 use Arodax\Doctrine\Extensions\Tree\Mapping\Validator;
 
 /**

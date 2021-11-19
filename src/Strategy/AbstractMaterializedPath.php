@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Strategy;
 
-use Arodax\Doctrine\Extensions\Common\Mapping\Event\AdapterInterface;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Event\TreeAdapterInterface as AdapterInterface;
 use Arodax\Doctrine\Extensions\Tree\TreeSubscriber;
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidArgumentException;
 use Arodax\Doctrine\Extensions\Tree\Exception\RuntimeException;

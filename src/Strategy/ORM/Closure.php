@@ -21,9 +21,9 @@ use Doctrine\Persistence\ObjectManager;
 use Arodax\Doctrine\Extensions\Tree\Exception\UnexpectedValueException;
 use Arodax\Doctrine\Extensions\Tree\Strategy\StrategyInterface;
 use Arodax\Doctrine\Extensions\Tree\TreeSubscriber;
-use Arodax\Doctrine\Extensions\Common\Wrapper\AbstractWrapper;
+use Arodax\Doctrine\Extensions\Tree\Wrapper\AbstractWrapper;
 use Arodax\Doctrine\Extensions\Tree\Exception\RuntimeException;
-use Arodax\Doctrine\Extensions\Common\Mapping\Event\AdapterInterface;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Event\AdapterInterface;
 
 /**
  * This strategy makes tree act like a closure table.

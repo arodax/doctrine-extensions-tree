@@ -18,7 +18,7 @@ use Arodax\Doctrine\Extensions\Tree\Exception\RuntimeException;
 use Doctrine\ORM\Query;
 use Arodax\Doctrine\Extensions\Tree\Entity\MappedSuperclass\AbstractClosure;
 use Arodax\Doctrine\Extensions\Tree\Strategy\StrategyInterface;
-use Arodax\Doctrine\Extensions\Common\Wrapper\EntityWrapper;
+use Arodax\Doctrine\Extensions\Tree\Wrapper\EntityWrapper;
 
 /**
  * The ClosureTreeRepository has some useful functions
