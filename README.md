@@ -17,6 +17,7 @@ Any fixes to the original tree code will be applied to this package whenever apl
 MIT
 
 ## Changelog
+- 4.0.0 Added support for PHP 8 attributes
 - 3.0.0 Changed namespace to `Arodax\Doctrine\Extensions\Tree`, package has been renamed to `arodax/doctrine-extensions-tree`.
   Make sure you **change path and the namespace in config/packages/doctrine.yaml** - see installation guide bellow for the example!
 - 2.0.0 Minimum compatible version of doctrine/common package has been increased to 3.0.*
@@ -45,7 +46,7 @@ doctrine:
             ...                
             Arodax\Doctrine\Extensions\Tree:
                 is_bundle: false
-                type: annotation
+                type: annotation #attribute
                 dir: '%kernel.project_dir%/vendor/arodax/doctrine-extensions-tree/src/Entity'
                 prefix: 'Arodax\Doctrine\Extensions\Tree\Entity'
 ```
