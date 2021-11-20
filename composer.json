@@ -8,6 +8,9 @@
     "require-dev": {
         "doctrine/orm": "^2.8"
     },
+    "suggest": {
+        "symfony/cache": "to cache annotations"
+    },
     "config": {
         "arodax/doctrine-extensions-common": "*"
     },

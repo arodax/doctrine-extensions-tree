@@ -15,11 +15,12 @@ namespace Arodax\Doctrine\Extensions\Tree\Mapping;
 
 use Arodax\Doctrine\Extensions\Tree\Mapping\Event\AdapterInterface;
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidArgumentException;
+use Doctrine\Common\Annotations\PsrCachedReader;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\EventArgs;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 /**
  * This is extension of event subscriber class and is
@@ -247,7 +248,9 @@ abstract class MappedEventSubscriber implements EventSubscriber
                     __DIR__ . '/../src/'
                 );
 
-            $reader = new \Doctrine\Common\Annotations\CachedReader($reader, new ArrayCache());
+            if (class_exists(ArrayAdapter::class)) {
+                $reader = new PsrCachedReader($reader, new ArrayAdapter());
+            }
 
             self::$defaultAnnotationReader = $reader;
         }
