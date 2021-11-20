@@ -3,7 +3,7 @@
     "description": "Tree extension for Doctrine",
     "type": "library",
     "require": {
-        "php": ">=7.4.0"
+        "php": ">=8.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.8",
