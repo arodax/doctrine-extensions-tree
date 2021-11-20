@@ -32,5 +32,6 @@ trait NestedSetEntityUuidTrait
      *
      * @ORM\Column(name="root", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'root', type: 'string', nullable: true)]
     private $root;
 }

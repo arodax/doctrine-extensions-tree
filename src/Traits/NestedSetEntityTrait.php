@@ -30,6 +30,7 @@ trait NestedSetEntityTrait
      *
      * @ORM\Column(name="root", type="integer", nullable=true)
      */
+    #[ORM\Column(name: 'root', type: 'integer', nullable: true)]
     private $root;
 
     /**
@@ -39,6 +40,7 @@ trait NestedSetEntityTrait
      *
      * @ORM\Column(name="lvl", type="integer")
      */
+    #[ORM\Column(name: 'lvl', type: 'integer')]
     private $level;
 
     /**
@@ -48,6 +50,7 @@ trait NestedSetEntityTrait
      *
      * @ORM\Column(name="lft", type="integer")
      */
+    #[ORM\Column(name: 'lft', type: 'integer')]
     private $left;
 
     /**
@@ -57,5 +60,6 @@ trait NestedSetEntityTrait
      *
      * @ORM\Column(name="rgt", type="integer")
      */
+    #[ORM\Column(name: 'rgt', type: 'integer')]
     private $right;
 }
