@@ -17,18 +17,9 @@ Any fixes to the original tree code will be applied to this package whenever apl
 MIT
 
 ## Changelog
-
-### Master branch
-
 - 3.0.0 Changed namespace to `Arodax\Doctrine\Extensions\Tree`, package has been renamed to `arodax/doctrine-extensions-tree`.
-Make sure you **change path and the namespace in config/packages/doctrine.yaml** - see installation guide bellow for the example!
-
-### 2.x branch
-
+  Make sure you **change path and the namespace in config/packages/doctrine.yaml** - see installation guide bellow for the example!
 - 2.0.0 Minimum compatible version of doctrine/common package has been increased to 3.0.*
-
-### 1.x branch
-
 - 1.0.3 Implementation of [#2020](https://github.com/Atlantic18/DoctrineExtensions/pull/2020) removed instances of hard coded parent column in queries
 - 1.0.2 Added missing repositories from the original extension
 - 1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
