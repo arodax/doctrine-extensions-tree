@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the arodax/doctrine-extensions-common package.
+ * This file is part of the arodax/doctrine-extensions-tree package.
  *
  * (c) ARODAX  <info@arodax.com>
  *
