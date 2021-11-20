@@ -14,6 +14,7 @@ declare(strict_types = 1);
 namespace Arodax\Doctrine\Extensions\Tree\Mapping;
 
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
+use Doctrine\DBAL\Types\Types;
 
 /**
  * This is a validator for all mapping drivers for Tree
@@ -27,150 +28,110 @@ use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
  */
 class Validator
 {
-    /**
+    /*
      * List of types which are valid for tree fields
-     *
-     * @var array
      */
-    private $validTypes = array(
-        'integer',
-        'smallint',
-        'bigint',
+    private array $validTypes = [
+        Types::INTEGER,
+        Types::SMALLINT,
+        Types::BIGINT,
         'int',
-    );
+    ];
 
-    /**
+    /*
      * List of types which are valid for the path (materialized path strategy)
-     *
-     * @var array
      */
-    private $validPathTypes = array(
-        'string',
-        'text',
-    );
+    private array $validPathTypes = [
+        Types::STRING,
+        Types::TEXT,
+    ];
 
-    /**
+    /*
      * List of types which are valid for the path source (materialized path strategy)
-     *
-     * @var array
      */
-    private $validPathSourceTypes = array(
+    private array $validPathSourceTypes = [
         'id',
-        'integer',
-        'smallint',
-        'bigint',
-        'string',
+        Types::INTEGER,
+        Types::SMALLINT,
+        Types::BIGINT,
+        Types::STRING,
         'int',
-        'float',
-    );
+        Types::FLOAT,
+    ];
 
-    /**
+    /*
      * List of types which are valid for the path hash (materialized path strategy)
-     *
-     * @var array
      */
-    private $validPathHashTypes = array(
-        'string',
-    );
+    private array $validPathHashTypes = [
+        Types::STRING,
+    ];
 
-    /**
+    /*
      * List of types which are valid for the path source (materialized path strategy)
-     *
-     * @var array
      */
-    private $validRootTypes = array(
-        'integer',
-        'smallint',
-        'bigint',
+    private array $validRootTypes = [
+        Types::INTEGER,
+        Types::SMALLINT,
+        Types::BIGINT,
         'int',
-        'string',
-        'guid',
-    );
+        Types::STRING,
+        Types::GUID,
+    ];
 
-    /**
+    /*
      * Checks if $field type is valid
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidField($meta, $field)
+    public function isValidField(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
         return $mapping && in_array($mapping['type'], $this->validTypes);
     }
 
-    /**
+    /*
      * Checks if $field type is valid for TreePath field
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidFieldForPath($meta, $field)
+    public function isValidFieldForPath(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
         return $mapping && in_array($mapping['type'], $this->validPathTypes);
     }
 
-    /**
+    /*
      * Checks if $field type is valid for PathSource field
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidFieldForPathSource($meta, $field)
+    public function isValidFieldForPathSource(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
         return $mapping && in_array($mapping['type'], $this->validPathSourceTypes);
     }
 
-    /**
+    /*
      * Checks if $field type is valid for PathHash field
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidFieldForPathHash($meta, $field)
+    public function isValidFieldForPathHash(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
         return $mapping && in_array($mapping['type'], $this->validPathHashTypes);
     }
 
-    /**
+    /*
      * Checks if $field type is valid for TreeLockTime field
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidFieldForLockTime($meta, $field)
+    public function isValidFieldForLockTime(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
         return $mapping && ($mapping['type'] === 'date' || $mapping['type'] === 'datetime' || $mapping['type'] === 'timestamp');
     }
 
-    /**
+    /*
      * Checks if $field type is valid for TreeRoot field
-     *
-     * @param object $meta
-     * @param string $field
-     *
-     * @return boolean
      */
-    public function isValidFieldForRoot($meta, $field)
+    public function isValidFieldForRoot(object $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
@@ -180,12 +141,9 @@ class Validator
     /**
      * Validates metadata for nested type tree
      *
-     * @param object $meta
-     * @param array  $config
-     *
      * @throws InvalidMappingException
      */
-    public function validateNestedTreeMetadata($meta, array $config)
+    public function validateNestedTreeMetadata(object $meta, array $config): void
     {
         $missingFields = array();
         if (!isset($config['parent'])) {
@@ -205,12 +163,9 @@ class Validator
     /**
      * Validates metadata for closure type tree
      *
-     * @param object $meta
-     * @param array  $config
-     *
      * @throws InvalidMappingException
      */
-    public function validateClosureTreeMetadata($meta, array $config)
+    public function validateClosureTreeMetadata(object $meta, array $config): void
     {
         $missingFields = array();
         if (!isset($config['parent'])) {
@@ -227,12 +182,9 @@ class Validator
     /**
      * Validates metadata for materialized path type tree
      *
-     * @param object $meta
-     * @param array  $config
-     *
      * @throws InvalidMappingException
      */
-    public function validateMaterializedPathTreeMetadata($meta, array $config)
+    public function validateMaterializedPathTreeMetadata(object $meta, array $config): void
     {
         $missingFields = array();
         if (!isset($config['parent'])) {
