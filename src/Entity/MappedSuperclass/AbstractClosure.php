@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 abstract class AbstractClosure
 {
     /**
@@ -25,6 +26,9 @@ abstract class AbstractClosure
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column]
     protected $id;
 
     /**
