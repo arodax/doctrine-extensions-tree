@@ -26,6 +26,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @author <rocco@roccosportal.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
 final class TreePath extends Annotation
 {
     public $separator = ',';
