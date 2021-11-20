@@ -6,8 +6,7 @@
         "php": ">=8.0"
     },
     "require-dev": {
-        "doctrine/orm": "^2.8",
-        "phpunit/phpunit": "^8.0"
+        "doctrine/orm": "^2.8"
     },
     "config": {
         "arodax/doctrine-extensions-common": "*"
