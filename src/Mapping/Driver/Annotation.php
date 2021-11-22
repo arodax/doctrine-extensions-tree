@@ -26,63 +26,8 @@ use Arodax\Doctrine\Extensions\Tree\Mapping\Validator;
  * @author <rocco@roccosportal.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-class Annotation extends AbstractAnnotation implements DriverInterface
+class Annotation extends AbstractPropertyDriver implements DriverInterface
 {
-    /**
-     * Annotation to define the tree type
-     */
-    const TREE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\Tree';
-
-    /**
-     * Annotation to mark field as one which will store left value
-     */
-    const LEFT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLeft';
-
-    /**
-     * Annotation to mark field as one which will store right value
-     */
-    const RIGHT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeRight';
-
-    /**
-     * Annotation to mark relative parent field
-     */
-    const PARENT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\ParentNode';
-
-    /**
-     * Annotation to mark node level
-     */
-    const LEVEL = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLevel';
-
-    /**
-     * Annotation to mark field as tree root
-     */
-    const ROOT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeRoot';
-
-    /**
-     * Annotation to specify closure tree class
-     */
-    const CLOSURE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeClosure';
-
-    /**
-     * Annotation to specify path class
-     */
-    const PATH = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreePath';
-
-    /**
-     * Annotation to specify path source class
-     */
-    const PATH_SOURCE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\PathSource';
-
-    /**
-     * Annotation to specify path hash class
-     */
-    const PATH_HASH = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\PathHash';
-
-    /**
-     * Annotation to mark the field to be used to hold the lock time
-     */
-    const LOCK_TIME = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLockTime';
-
     /**
      * List of tree strategies available
      *

@@ -24,7 +24,7 @@ use Arodax\Doctrine\Extensions\Common\Exception\InvalidMappingException;
  * @author     Daniel Chodusov <daniel@chodusov.com>
  * @license    MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-abstract class AbstractAnnotation implements AnnotationInterface
+abstract class AbstractPropertyDriver implements AnnotationInterface
 {
     use RelatedClassNameTrait;
 
