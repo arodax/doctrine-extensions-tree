@@ -29,7 +29,7 @@ interface DriverInterface
      *
      * @return void
      */
-    public function readExtendedMetadata($meta, array &$config);
+    public function readExtendedMetadata(object $meta, array &$config);
 
     /**
      * Passes in the original driver
@@ -38,5 +38,5 @@ interface DriverInterface
      *
      * @return void
      */
-    public function setOriginalDriver($driver);
+    public function setOriginalDriver(object $driver);
 }

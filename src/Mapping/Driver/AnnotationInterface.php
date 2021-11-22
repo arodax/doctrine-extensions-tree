@@ -100,5 +100,5 @@ interface AnnotationInterface extends DriverInterface
      *
      * @param object $reader - annotation reader class
      */
-    public function setAnnotationReader($reader);
+    public function setAnnotationReader(object $reader);
 }

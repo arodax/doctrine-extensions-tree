@@ -42,7 +42,7 @@ class Annotation extends AbstractPropertyDriver implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function readExtendedMetadata($meta, array &$config)
+    public function readExtendedMetadata(object $meta, array &$config): void
     {
         $validator = new Validator();
         $class = $this->getMetaReflectionClass($meta);

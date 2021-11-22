@@ -15,6 +15,7 @@ namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Arodax\Doctrine\Extensions\Common\Exception\InvalidMappingException;
+use Doctrine\ORM\Mapping\MappingException;
 
 /**
  * This is an abstract class to implement common functionality
@@ -45,7 +46,7 @@ abstract class AbstractPropertyDriver implements AnnotationInterface
      *
      * @var array
      */
-    protected $validTypes = array();
+    protected array $validTypes = [];
 
     /**
      * {@inheritDoc}
@@ -88,15 +89,12 @@ abstract class AbstractPropertyDriver implements AnnotationInterface
     /**
      * Checks if $field type is valid
      *
-     * @param ClassMetadataInfo $meta
-     * @param string $field
-     *
      * @return boolean Whether field is valid or not.
      *
      * @throws InvalidMappingException if mapping type is not declared.
-     * @throws \Doctrine\ORM\Mapping\MappingException
+     * @throws MappingException
      */
-    protected function isValidField(ClassMetadataInfo $meta, $field): bool
+    protected function isValidField(ClassMetadataInfo $meta, string $field): bool
     {
         $mapping = $meta->getFieldMapping($field);
 
