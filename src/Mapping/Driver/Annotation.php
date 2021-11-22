@@ -28,16 +28,6 @@ use Arodax\Doctrine\Extensions\Tree\Mapping\Validator;
  */
 class Annotation extends AbstractPropertyDriver implements DriverInterface
 {
-    /**
-     * List of tree strategies available
-     *
-     * @var array
-     */
-    protected $strategies = array(
-        'nested',
-        'closure',
-        'materializedPath',
-    );
 
     /**
      * {@inheritDoc}

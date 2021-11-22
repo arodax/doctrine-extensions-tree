@@ -49,6 +49,17 @@ abstract class AbstractPropertyDriver implements AnnotationInterface
     protected array $validTypes = [];
 
     /**
+     * List of tree strategies available
+     *
+     * @var array
+     */
+    protected array $strategies = [
+        'nested',
+        'closure',
+        'materializedPath',
+    ];
+
+    /**
      * {@inheritDoc}
      */
     public function setAnnotationReader($reader)
