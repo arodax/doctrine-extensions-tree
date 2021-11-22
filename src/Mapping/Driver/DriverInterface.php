@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
+
 /**
  * The mapping driver abstract class, defines the
  * metadata extraction function common among
@@ -24,12 +26,12 @@ interface DriverInterface
      * Read extended metadata configuration for
      * a single mapped class
      *
-     * @param object $meta
+     * @param ClassMetadata $meta
      * @param array  $config
      *
      * @return void
      */
-    public function readExtendedMetadata(object $meta, array &$config);
+    public function readExtendedMetadata(ClassMetadata $meta, array &$config);
 
     /**
      * Passes in the original driver

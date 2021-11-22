@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
+
 /**
  * The chain mapping driver enables chained
  * extension mapping driver support
@@ -79,7 +81,7 @@ class ChainMapping implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function readExtendedMetadata($meta, array &$config)
+    public function readExtendedMetadata(ClassMetadata $meta, array &$config)
     {
         foreach ($this->_drivers as $namespace => $driver) {
             if (strpos($meta->name, $namespace) === 0) {

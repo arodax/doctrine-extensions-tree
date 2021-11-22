@@ -15,6 +15,7 @@ namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
 use Arodax\Doctrine\Extensions\Tree\Mapping\Validator;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * This is a xml mapping driver for Tree
@@ -45,7 +46,7 @@ class Xml extends AbstractXML implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function readExtendedMetadata($meta, array &$config)
+    public function readExtendedMetadata(ClassMetadata $meta, array &$config)
     {
         /**
          * @var \SimpleXmlElement $xml

@@ -15,6 +15,7 @@ namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
 use Arodax\Doctrine\Extensions\Tree\Exception\InvalidMappingException;
 use Arodax\Doctrine\Extensions\Tree\Mapping\Validator;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * This is an annotation mapping driver for Tree
@@ -32,7 +33,7 @@ class Annotation extends AbstractPropertyDriver implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function readExtendedMetadata(object $meta, array &$config): void
+    public function readExtendedMetadata(ClassMetadata $meta, array &$config): void
     {
         $validator = new Validator();
         $class = $this->getMetaReflectionClass($meta);
