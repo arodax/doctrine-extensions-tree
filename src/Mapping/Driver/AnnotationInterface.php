@@ -13,6 +13,18 @@ declare(strict_types=1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\ParentNode;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\PathHash;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\PathSource;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\Tree;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeClosure;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLeft;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLevel;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLockTime;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreePath;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeRight;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeRoot;
+
 /**
  * Annotation driver interface, provides method
  * to set custom annotation reader.
@@ -25,57 +37,57 @@ interface AnnotationInterface extends DriverInterface
     /*
      * Annotation to define the tree type
      */
-    public const TREE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\Tree';
+    public const TREE = Tree::class;
 
     /*
      * Annotation to mark field as one which will store left value
      */
-    public const LEFT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLeft';
+    public const LEFT = TreeLeft::class;
 
     /*
      * Annotation to mark field as one which will store right value
      */
-    public const RIGHT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeRight';
+    public const RIGHT = TreeRight::class;
 
     /*
      * Annotation to mark relative parent field
      */
-    public const PARENT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\ParentNode';
+    public const PARENT = ParentNode::class;
 
     /*
      * Annotation to mark node level
      */
-    public const LEVEL = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLevel';
+    public const LEVEL = TreeLevel::class;
 
     /*
      * Annotation to mark field as tree root
      */
-    public const ROOT = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeRoot';
+    public const ROOT = TreeRoot::class;
 
     /*
      * Annotation to specify closure tree class
      */
-    public const CLOSURE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeClosure';
+    public const CLOSURE = TreeClosure::class;
 
     /*
      * Annotation to specify path class
      */
-    public const PATH = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreePath';
+    public const PATH = TreePath::class;
 
     /*
      * Annotation to specify path source class
      */
-    public const PATH_SOURCE = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\PathSource';
+    public const PATH_SOURCE = PathSource::class;
 
     /*
      * Annotation to specify path hash class
      */
-    public const PATH_HASH = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\PathHash';
+    public const PATH_HASH = PathHash::class;
 
     /*
      * Annotation to mark the field to be used to hold the lock time
      */
-    public const LOCK_TIME = 'Arodax\Doctrine\Extensions\\Tree\\Mapping\\Annotation\\TreeLockTime';
+    public const LOCK_TIME = TreeLockTime::class;
 
     /**
      * Set annotation reader class
