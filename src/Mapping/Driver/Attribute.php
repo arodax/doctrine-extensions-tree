@@ -143,7 +143,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
                 }
 
                 /** @var TreeRoot $attribute */
-                $attribute = $attributes[0];
+                $attribute = $attributes[0]->newInstance();
 
                 $config['rootIdentifierMethod'] =  $attribute->identifierMethod;
                 $config['root'] = $field;
