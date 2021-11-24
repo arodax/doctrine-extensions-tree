@@ -23,6 +23,7 @@ use Doctrine\Persistence\Mapping\Driver\SymfonyFileLocator;
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\DoctrineBundle\Mapping\MappingDriver as DoctrineBundleMappingDriver;
 
 /**
  * The extension metadata factory is responsible for extension driver
@@ -143,9 +144,14 @@ class ExtensionMetadataFactory
      */
     protected function getDriver($omDriver)
     {
+        if ($omDriver instanceof DoctrineBundleMappingDriver) {
+            $omDriver = $omDriver->getDriver();
+        }
+
         $driver = null;
         $className = get_class($omDriver);
         $driverName = substr($className, strrpos($className, '\\') + 1);
+
         if ($omDriver instanceof MappingDriverChain || $driverName == 'DriverChain') {
             $driver = new ChainMapping();
 

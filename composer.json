@@ -9,7 +9,8 @@
         "doctrine/orm": "^2.8"
     },
     "suggest": {
-        "symfony/cache": "to cache annotations"
+        "symfony/cache": "to cache annotations",
+        "doctrine/doctrine-bundle": "to be used with doctrine bundle"
     },
     "conflict": {
         "arodax/doctrine-extensions-common": "*"
