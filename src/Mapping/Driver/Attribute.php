@@ -55,7 +55,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
 
             $config['strategy'] = $attribute->type;
             $config['activate_locking'] = $attribute->activateLocking;
-            $config['locking_timeout'] = (int) $attribute->activateLocking;
+            $config['locking_timeout'] = (int) $attribute->lockingTimeout;
 
             if ($config['locking_timeout'] < 1) {
                 throw new InvalidMappingException('Tree Locking Timeout must be at least of 1 second.');
