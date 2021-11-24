@@ -228,17 +228,17 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             if (isset($config['activate_locking']) && $config['activate_locking'] && !isset($config['lock_time'])) {
                 throw new InvalidMappingException('You need to map a date field as the tree lock time field to activate locking support.');
             }
+        }
 
-            if (!$meta->isMappedSuperclass && $config) {
-                if (isset($config['strategy'])) {
-                    if (is_array($meta->identifier) && count($meta->identifier) > 1) {
-                        throw new InvalidMappingException("Tree does not support composite identifiers in class - {$meta->name}");
-                    }
-                    $method = 'validate'.ucfirst($config['strategy']).'TreeMetadata';
-                    $validator->$method($meta, $config);
-                } else {
-                    throw new InvalidMappingException("Cannot find Tree type for class: {$meta->name}");
+        if (!$meta->isMappedSuperclass && $config) {
+            if (isset($config['strategy'])) {
+                if (is_array($meta->identifier) && count($meta->identifier) > 1) {
+                    throw new InvalidMappingException("Tree does not support composite identifiers in class - {$meta->name}");
                 }
+                $method = 'validate'.ucfirst($config['strategy']).'TreeMetadata';
+                $validator->$method($meta, $config);
+            } else {
+                throw new InvalidMappingException("Cannot find Tree type for class: {$meta->name}");
             }
         }
     }
