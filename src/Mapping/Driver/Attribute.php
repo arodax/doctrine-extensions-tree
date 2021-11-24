@@ -47,7 +47,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             /** @var Tree $attribute */
-            $attribute = $attributes[0];
+            $attribute = $attributes[0]->newInstance();
 
             if (!in_array($attribute->type, $this->strategies)) {
                 throw new InvalidMappingException("Tree type: {$attribute->type} is not available.");
@@ -177,7 +177,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
                 }
 
                 /** @var TreePath $attribute */
-                $attribute = $attributes[0];
+                $attribute = $attributes[0]->newInstance();
 
                 if (strlen($attribute->separator) > 1) {
                     throw new InvalidMappingException("Tree TreePath field - [{$field}] Separator {$attribute->separator} is invalid. It must be only one character long.");
