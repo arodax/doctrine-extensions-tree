@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
+use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
  * TreePath annotation for Tree behavioral extension
  *
  * @Annotation
+ * @NamedArgumentConstructor
  * @Target("PROPERTY")
  *
  * @author Gustavo Falco <comfortablynumb84@gmail.com>
@@ -27,13 +29,35 @@ use Doctrine\Common\Annotations\Annotation;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreePath extends Annotation
+final class TreePath
 {
-    public $separator = ',';
+    public function __construct(
+        public string $separator = ',',
+        public ?bool $appendId = null,
+        public bool $startsWithSeparator = false,
+        public bool $endsWithSeparator = true
+    ) {
+    }
 
-    public $appendId = null;
+    public function getSeparator(): string
+    {
+        return $this->separator;
+    }
 
-    public $startsWithSeparator = false;
+    public function getAppendId(): ?bool
+    {
+        return $this->appendId;
+    }
 
-    public $endsWithSeparator = true;
+    public function isStartsWithSeparator(): bool
+    {
+        return $this->startsWithSeparator;
+    }
+
+    public function isEndsWithSeparator(): bool
+    {
+        return $this->endsWithSeparator;
+    }
+
+
 }

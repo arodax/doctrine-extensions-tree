@@ -14,21 +14,27 @@ declare(strict_types=1);
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
+use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
  * TreeRoot annotation for Tree behavioral extension
  *
  * @Annotation
+ * @NamedArgumentConstructor
  * @Target("PROPERTY")
  *
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreeRoot extends Annotation
+final class TreeRoot
 {
-    /**
-     * @var string $identifierMethod
-     */
-    public $identifierMethod;
+    public function __construct(public ?string $identifierMethod = null)
+    {
+    }
+
+    public function getIdentifierMethod(): ?string
+    {
+        return $this->identifierMethod;
+    }
 }

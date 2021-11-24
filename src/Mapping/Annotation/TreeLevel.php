@@ -25,7 +25,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreeLevel extends Annotation
+final class TreeLevel
 {
     //
 }

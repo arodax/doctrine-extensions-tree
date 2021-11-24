@@ -14,36 +14,46 @@ declare(strict_types=1);
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
+use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
  * Tree annotation for Tree behavioral extension
  *
  * @Annotation
+ * @NamedArgumentConstructor
  * @Target("CLASS")
  *
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class Tree extends Annotation
+final class Tree
 {
-    /**
-     * @var string
-     */
-    public $type = 'nested';
+    public function __construct(
+        public string $type = 'nested',
+        public bool $activateLocking = false,
+        public int $lockingTimeout = 3,
+        public ?string $identifierMethod = null,
+    ) {
+    }
 
-    /**
-     * @var string
-     */
-    public $activateLocking = false;
+    public function getType(): string
+    {
+        return $this->type;
+    }
 
-    /**
-     * @var integer
-     */
-    public $lockingTimeout = 3;
+    public function isActivateLocking(): bool
+    {
+        return $this->activateLocking;
+    }
 
-    /**
-     * @var string $identifierMethod
-     */
-    public $identifierMethod;
+    public function getLockingTimeout(): int
+    {
+        return $this->lockingTimeout;
+    }
+
+    public function getIdentifierMethod(): ?string
+    {
+        return $this->identifierMethod;
+    }
 }
