@@ -17,6 +17,8 @@ use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
+ * @deprecated since 3.2.0 and will be removed in 4.0.0 use Path::class instead
+ *
  * TreePath annotation for Tree behavioral extension
  *
  * @Annotation
@@ -29,44 +31,6 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreePath
+final class TreePath extends Path
 {
-    public string $separator = ',';
-    public ?bool $appendId = null;
-    public bool $startsWithSeparator = false;
-    public bool $endsWithSeparator = true;
-
-    public function __construct(
-        string $separator = ',',
-        ?bool $appendId = null,
-        bool $startsWithSeparator = false,
-        bool $endsWithSeparator = true
-    ) {
-        $this->separator = $separator;
-        $this->appendId = $appendId;
-        $this->startsWithSeparator = $startsWithSeparator;
-        $this->endsWithSeparator = $endsWithSeparator;
-    }
-
-    public function getSeparator(): string
-    {
-        return $this->separator;
-    }
-
-    public function getAppendId(): ?bool
-    {
-        return $this->appendId;
-    }
-
-    public function isStartsWithSeparator(): bool
-    {
-        return $this->startsWithSeparator;
-    }
-
-    public function isEndsWithSeparator(): bool
-    {
-        return $this->endsWithSeparator;
-    }
-
-
 }

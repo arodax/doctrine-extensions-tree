@@ -62,7 +62,13 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
         }
 
-        $attributes = $class->getAttributes(self::CLOSURE);
+        if (!empty($class->getAttributes(self::CLOSURE))) {
+            $attributes = $class->getAttributes(self::CLOSURE);
+        } else {
+            $attributes = $class->getAttributes(self::DEPRECATED_CLOSURE);
+        }
+
+
         if (!empty($attributes)) {
 
             if (count($attributes) > 1) {
@@ -89,7 +95,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // left
-            if (!empty($property->getAttributes(self::LEFT))) {
+            if (!empty($property->getAttributes(self::LEFT) || !empty($property->getAttributes(self::DEPRECATED_LEFT)))) {
                 $field = $property->getName();
                 if (!$meta->hasField($field)) {
                     throw new InvalidMappingException("Unable to find 'left' - [{$field}] as mapped property in entity - {$meta->name}");
@@ -101,7 +107,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // right
-            if (!empty($property->getAttributes(self::RIGHT))) {
+            if (!empty($property->getAttributes(self::RIGHT) || !empty($property->getAttributes(self::DEPRECATED_RIGHT)))) {
                 $field = $property->getName();
                 if (!$meta->hasField($field)) {
                     throw new InvalidMappingException("Unable to find 'right' - [{$field}] as mapped property in entity - {$meta->name}");
@@ -113,7 +119,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // ancestor/parent
-            if (!empty($property->getAttributes(self::PARENT))) {
+            if (!empty($property->getAttributes(self::PARENT_NODE))) {
                 $field = $property->getName();
                 if (!$meta->isSingleValuedAssociation($field)) {
                     throw new InvalidMappingException("Unable to find ancestor/parent child relation through ancestor field - [{$field}] in class - {$meta->name}");
@@ -122,8 +128,14 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // root
-            if (!empty($attributes = $property->getAttributes(self::ROOT))) {
+            if (!empty($property->getAttributes(self::ROOT) || !empty($property->getAttributes(self::DEPRECATED_ROOT)))) {
                 $field = $property->getName();
+
+                if (!empty($property->getAttributes(self::ROOT))) {
+                    $attributes = $property->getAttributes(self::ROOT);
+                } else {
+                    $attributes = $property->getAttributes(self::DEPRECATED_ROOT);
+                }
 
                 if (count($attributes) > 1) {
                     throw new InvalidMappingException(sprintf("There must be only one %s attribute,
@@ -150,7 +162,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // level
-            if (!empty($property->getAttributes(self::LEVEL))) {
+            if (!empty($property->getAttributes(self::LEVEL) || !empty($property->getAttributes(self::DEPRECATED_LEVEL)))) {
                 $field = $property->getName();
                 if (!$meta->hasField($field)) {
                     throw new InvalidMappingException("Unable to find 'level' - [{$field}] as mapped property in entity - {$meta->name}");
@@ -162,7 +174,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // path
-            if (!empty($attributes = $property->getAttributes(self::PATH))) {
+            if (!empty($attributes = $property->getAttributes(self::PATH) || !empty($property->getAttributes(self::DEPRECATED_PATH)))) {
                 $field = $property->getName();
                 if (!$meta->hasField($field)) {
                     throw new InvalidMappingException("Unable to find 'path' - [{$field}] as mapped property in entity - {$meta->name}");
@@ -174,6 +186,12 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
                 if (count($attributes) > 1) {
                     throw new InvalidMappingException(sprintf("There must be only one %s attribute,
                  but %s attributes specified at %s", self::PATH, count($attributes), $field));
+                }
+
+                if (!empty($property->getAttributes(self::PATH))) {
+                    $attributes = $property->getAttributes(self::PATH);
+                } else {
+                    $attributes = $property->getAttributes(self::DEPRECATED_PATH);
                 }
 
                 /** @var TreePath $attribute */
@@ -214,7 +232,7 @@ class Attribute extends AbstractPropertyDriver implements DriverInterface
             }
 
             // lock time
-            if (!empty($property->getAttributes(self::LOCK_TIME))) {
+            if (!empty($property->getAttributes(self::LOCK_TIME) || !empty($property->getAttributes(self::DEPRECATED_LOCK_TIME)))) {
                 $field = $property->getName();
                 if (!$meta->hasField($field)) {
                     throw new InvalidMappingException("Unable to find 'lock_time' - [{$field}] as mapped property in entity - {$meta->name}");

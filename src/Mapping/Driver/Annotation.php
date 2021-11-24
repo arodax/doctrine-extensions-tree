@@ -88,7 +88,7 @@ class Annotation extends AbstractPropertyDriver implements DriverInterface
                 $config['right'] = $field;
             }
             // ancestor/parent
-            if ($this->reader->getPropertyAnnotation($property, self::PARENT)) {
+            if ($this->reader->getPropertyAnnotation($property, self::PARENT_NODE)) {
                 $field = $property->getName();
                 if (!$meta->isSingleValuedAssociation($field)) {
                     throw new InvalidMappingException("Unable to find ancestor/parent child relation through ancestor field - [{$field}] in class - {$meta->name}");

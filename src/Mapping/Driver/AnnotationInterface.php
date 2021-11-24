@@ -13,17 +13,7 @@ declare(strict_types=1);
 
 namespace Arodax\Doctrine\Extensions\Tree\Mapping\Driver;
 
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\ParentNode;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\PathHash;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\PathSource;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\Tree;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeClosure;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLeft;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLevel;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeLockTime;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreePath;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeRight;
-use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeRoot;
+use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation as Tree;
 
 /**
  * Annotation driver interface, provides method
@@ -35,59 +25,94 @@ use Arodax\Doctrine\Extensions\Tree\Mapping\Annotation\TreeRoot;
 interface AnnotationInterface extends DriverInterface
 {
     /*
-     * Annotation to define the tree type
+     * Annotation or attribute to define the tree type
      */
-    public const TREE = Tree::class;
+    public const TREE = Tree\Tree::class;
 
     /*
-     * Annotation to mark field as one which will store left value
+     * Annotation or attribute to mark field as one which will store left value
      */
-    public const LEFT = TreeLeft::class;
+    public const LEFT = Tree\Left::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Left::class instead
+     */
+    public const DEPRECATED_LEFT = Tree\TreeLeft::class;
 
     /*
-     * Annotation to mark field as one which will store right value
+     * Annotation or attribute to mark field as one which will store right value
      */
-    public const RIGHT = TreeRight::class;
+    public const RIGHT = Tree\Right::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Right::class instead
+     */
+    public const DEPRECATED_RIGHT = Tree\TreeRight::class;
 
     /*
-     * Annotation to mark relative parent field
+     * Annotation or attribute to mark relative parent field
      */
-    public const PARENT = ParentNode::class;
+    public const PARENT_NODE = Tree\ParentNode::class;
 
     /*
-     * Annotation to mark node level
+     * Annotation or attribute to mark node level
      */
-    public const LEVEL = TreeLevel::class;
+    public const LEVEL = Tree\Level::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Level::class instead
+     */
+    public const DEPRECATED_LEVEL = Tree\TreeLevel::class;
 
     /*
-     * Annotation to mark field as tree root
+     * Annotation or attribute to mark field as tree root
      */
-    public const ROOT = TreeRoot::class;
+    public const ROOT = Tree\Root::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Root::class instead
+     */
+    public const DEPRECATED_ROOT = Tree\TreeRoot::class;
 
     /*
-     * Annotation to specify closure tree class
+     * Annotation or attribute to specify closure tree class
      */
-    public const CLOSURE = TreeClosure::class;
+    public const CLOSURE = Tree\Closure::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Closure::class instead
+     */
+    public const DEPRECATED_CLOSURE = Tree\TreeClosure::class;
 
     /*
-     * Annotation to specify path class
+     * Annotation or attribute to specify path class
      */
-    public const PATH = TreePath::class;
+    public const PATH = Tree\Path::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use Path::class instead
+     */
+    public const DEPRECATED_PATH = Tree\TreePath::class;
 
     /*
-     * Annotation to specify path source class
+     * Annotation or attribute to specify path source class
      */
-    public const PATH_SOURCE = PathSource::class;
+    public const PATH_SOURCE = Tree\PathSource::class;
 
     /*
-     * Annotation to specify path hash class
+     * Annotation or attribute to specify path hash class
      */
-    public const PATH_HASH = PathHash::class;
+    public const PATH_HASH = Tree\PathHash::class;
 
     /*
-     * Annotation to mark the field to be used to hold the lock time
+     * Annotation or attribute to mark the field to be used to hold the lock time
      */
-    public const LOCK_TIME = TreeLockTime::class;
+    public const LOCK_TIME = Tree\LockTime::class;
+
+    /**
+     * @deprecated since 3.2.0 and will be removed in 4.0.0 use LockTime::class instead
+     */
+    public const DEPRECATED_LOCK_TIME = Tree\TreeLockTime::class;
 
     /**
      * Set annotation reader class

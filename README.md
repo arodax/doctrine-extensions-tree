@@ -7,16 +7,16 @@
 
 This extension allows you to store your data in hierarchicaly in your database using Doctrine ORM.
 
-Note: this code is a part of the hard fork of 
-[Atlantic18/DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) 2.4.x branch. The goal of this repository is to split original extensions into small packages, each package responsible for the single task. 
-
-Any fixes to the original tree code will be applied to this package whenever aplicable, see the changelog for for more information.
+Note: this code is the hard fork of 
+[Atlantic18/DoctrineExtensions](https://github.com/Atlantic18/DoctrineExtensions) 2.4.x branch of the Tree extension only.
 
 ## Licence
 
 MIT
 
 ## Changelog
+- 3.2.0 Deprecated TreeRight, TreeLeft, TreeClosure, TreeRoot, TreePath, TreeLevel annotations, use them without "Tree" prefix (e.g. Right, Left, Closure ...)
+
 - 3.2.0 Added native PHP attributes support 
 - 3.1.0 Renamed **TreeAdapterInterface** to **AdapterInterface**
 - 3.0.0 Changed namespace to `Arodax\Doctrine\Extensions\Tree`, package has been renamed to `arodax/doctrine-extensions-tree`.
@@ -24,6 +24,7 @@ MIT
 - 2.0.0 Minimum compatible version of doctrine/common package has been increased to 3.0.*
 - 1.0.3 Implementation of [#2020](https://github.com/Atlantic18/DoctrineExtensions/pull/2020) removed instances of hard coded parent column in queries
 - 1.0.2 Added missing repositories from the original extension
+
 - 1.0.1 Implementation of [#2001](https://github.com/Atlantic18/DoctrineExtensions/pull/2001) fixing problem causing wrong left/right order.    
 
 ## Installation
@@ -97,28 +98,32 @@ class Category
     private $id;
 
     /**
-     * @Tree\TreeLeft
+     * @Tree\Left
      * @ORM\Column(name="lft", type="integer")
      */
+     #[Tree\Left]
     private $lft;
 
     /**
-     * @Tree\TreeLevel
+     * @Tree\Level
      * @ORM\Column(name="lvl", type="integer")
      */
+     #[Tree\Level]
     private $lvl;
 
     /**
-     * @Tree\TreeRight()
+     * @Tree\Right()
      * @ORM\Column(name="rgt", type="integer")
      */
+     #[Tree\Right]
     private $rgt;
 
     /**
-     * @Tree\TreeRoot()
+     * @Tree\Root()
      * @ORM\ManyToOne(targetEntity="MenuItem")
      * @ORM\JoinColumn(name="tree_root", referencedColumnName="id", onDelete="CASCADE")
      */
+     #[Tree\Root]
     private $root;
 
     /**
@@ -126,6 +131,7 @@ class Category
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
+     #[Tree\ParentNode]
     private $parent;
 
     /**

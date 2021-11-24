@@ -17,6 +17,8 @@ use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
+ * @deprecated since 3.2.0 and will be removed in 4.0.0 use Closure::class instead
+ *
  * TreeClosure annotation for Tree behavioral extension
  *
  * @Annotation
@@ -27,17 +29,6 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class TreeClosure
+final class TreeClosure extends Closure
 {
-    public ?string $class = null;
-
-    public function __construct(string $class)
-    {
-        $this->class = $class;
-    }
-
-    public function getClass(): ?string
-    {
-        return $this->class;
-    }
 }

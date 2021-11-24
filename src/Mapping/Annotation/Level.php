@@ -16,9 +16,7 @@ namespace Arodax\Doctrine\Extensions\Tree\Mapping\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * @deprecated since 3.2.0 and will be removed in 4.0.0 use Right::class instead
- *
- * TreeRight annotation for Tree behavioral extension
+ * TreeLevel annotation for Tree behavioral extension
  *
  * @Annotation
  * @Target("PROPERTY")
@@ -27,7 +25,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreeRight extends Right
+class Level
 {
     //
 }

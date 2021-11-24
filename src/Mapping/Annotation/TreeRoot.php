@@ -17,6 +17,8 @@ use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 
 /**
+ * @deprecated since 3.2.0 and will be removed in 4.0.0 use Root::class instead
+ *
  * TreeRoot annotation for Tree behavioral extension
  *
  * @Annotation
@@ -27,17 +29,6 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class TreeRoot
+final class TreeRoot extends Root
 {
-    public ?string $identifierMethod = null;
-
-    public function __construct(?string $identifierMethod = null)
-    {
-        $this->identifierMethod = $identifierMethod;
-    }
-
-    public function getIdentifierMethod(): ?string
-    {
-        return $this->identifierMethod;
-    }
 }
