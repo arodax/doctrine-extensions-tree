@@ -31,12 +31,21 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 final class TreePath
 {
+    public string $separator = ',';
+    public ?bool $appendId = null;
+    public bool $startsWithSeparator = false;
+    public bool $endsWithSeparator = true;
+
     public function __construct(
-        public string $separator = ',',
-        public ?bool $appendId = null,
-        public bool $startsWithSeparator = false,
-        public bool $endsWithSeparator = true
+        string $separator = ',',
+        ?bool $appendId = null,
+        bool $startsWithSeparator = false,
+        bool $endsWithSeparator = true
     ) {
+        $this->separator = $separator;
+        $this->appendId = $appendId;
+        $this->startsWithSeparator = $startsWithSeparator;
+        $this->endsWithSeparator = $endsWithSeparator;
     }
 
     public function getSeparator(): string

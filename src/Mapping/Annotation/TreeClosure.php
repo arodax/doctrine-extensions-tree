@@ -29,11 +29,14 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class TreeClosure
 {
-    public function __construct(public string $class)
+    public ?string $class = null;
+
+    public function __construct(string $class)
     {
+        $this->class = $class;
     }
 
-    public function getClass(): string
+    public function getClass(): ?string
     {
         return $this->class;
     }

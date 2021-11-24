@@ -29,12 +29,22 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class Tree
 {
+    public string $type = 'nested';
+    public bool $activateLocking = false;
+    public int $lockingTimeout = 3;
+    public ?string $identifierMethod = null;
+
     public function __construct(
-        public string $type = 'nested',
-        public bool $activateLocking = false,
-        public int $lockingTimeout = 3,
-        public ?string $identifierMethod = null,
+        string $type = 'nested',
+        bool $activateLocking = false,
+        int $lockingTimeout = 3,
+        ?string $identifierMethod = null,
     ) {
+
+        $this->type = $type;
+        $this->activateLocking = $activateLocking;
+        $this->lockingTimeout = $lockingTimeout;
+        $this->identifierMethod = $identifierMethod;
     }
 
     public function getType(): string

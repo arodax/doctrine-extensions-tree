@@ -29,8 +29,11 @@ use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 final class TreeRoot
 {
-    public function __construct(public ?string $identifierMethod = null)
+    public ?string $identifierMethod = null;
+
+    public function __construct(?string $identifierMethod = null)
     {
+        $this->identifierMethod = $identifierMethod;
     }
 
     public function getIdentifierMethod(): ?string
