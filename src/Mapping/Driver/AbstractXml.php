@@ -26,7 +26,7 @@ use SimpleXMLElement;
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-abstract class AbstractXML extends AbstractFile
+abstract class AbstractXml extends AbstractFile
 {
     const DOCTRINE_NAMESPACE_URI = 'http://doctrine-project.org/schemas/orm/doctrine-mapping';
 

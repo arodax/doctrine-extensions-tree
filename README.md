@@ -15,6 +15,7 @@ Note: this code is the hard fork of
 MIT
 
 ## Changelog
+- 3.2.1 Fixed class and file name mismatch for XML driver
 - 3.2.0 Deprecated TreeRight, TreeLeft, TreeClosure, TreeRoot, TreePath, TreeLevel annotations, use them without "Tree" prefix (e.g. Right, Left, Closure ...)
 
 - 3.2.0 Added native PHP attributes support 

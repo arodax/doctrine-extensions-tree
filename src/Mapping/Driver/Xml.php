@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
  * @author Miha Vrhovnik <miha.vrhovnik@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-class Xml extends AbstractXML implements DriverInterface
+class Xml extends AbstractXml implements DriverInterface
 {
     const GEDMO_NAMESPACE_URI = 'http://gediminasm.org/schemas/orm/doctrine-extensions-mapping';
 
