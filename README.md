@@ -15,9 +15,9 @@ Note: this code is the hard fork of
 MIT
 
 ## Changelog
+- 3.2.2 Automatically cache entity metadata when symfony/cache is installed.
 - 3.2.1 Fixed class and file name mismatch for XML driver
 - 3.2.0 Deprecated TreeRight, TreeLeft, TreeClosure, TreeRoot, TreePath, TreeLevel annotations, use them without "Tree" prefix (e.g. Right, Left, Closure ...)
-
 - 3.2.0 Added native PHP attributes support 
 - 3.1.0 Renamed **TreeAdapterInterface** to **AdapterInterface**
 - 3.0.0 Changed namespace to `Arodax\Doctrine\Extensions\Tree`, package has been renamed to `arodax/doctrine-extensions-tree`.
