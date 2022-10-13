@@ -20,7 +20,6 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\EventArgs;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 /**
  * This is extension of event subscriber class and is
@@ -130,28 +129,19 @@ abstract class MappedEventSubscriber implements EventSubscriber
     public function getConfiguration(ObjectManager $objectManager, $class)
     {
         $config = array();
+
         if (isset(self::$configurations[$this->name][$class])) {
             $config = self::$configurations[$this->name][$class];
         } else {
             $factory = $objectManager->getMetadataFactory();
-            $cacheDriver = $factory->getCacheDriver();
-            if ($cacheDriver) {
-                $cacheId = ExtensionMetadataFactory::getCacheId($class, $this->getNamespace());
-                if (($cached = $cacheDriver->fetch($cacheId)) !== false) {
-                    self::$configurations[$this->name][$class] = $cached;
-                    $config = $cached;
-                } else {
-                    // re-generate metadata on cache miss
-                    $this->loadMetadataForObjectClass($objectManager, $factory->getMetadataFor($class));
-                    if (isset(self::$configurations[$this->name][$class])) {
-                        $config = self::$configurations[$this->name][$class];
-                    }
-                }
+            $this->loadMetadataForObjectClass($objectManager, $factory->getMetadataFor($class));
+            if (isset(self::$configurations[$this->name][$class])) {
+                $config = self::$configurations[$this->name][$class];
+            }
 
-                $objectClass = isset($config['useObjectClass']) ? $config['useObjectClass'] : $class;
-                if ($objectClass !== $class) {
-                    $this->getConfiguration($objectManager, $objectClass);
-                }
+            $objectClass = isset($config['useObjectClass']) ? $config['useObjectClass'] : $class;
+            if ($objectClass !== $class) {
+                $this->getConfiguration($objectManager, $objectClass);
             }
         }
 
@@ -244,9 +234,9 @@ abstract class MappedEventSubscriber implements EventSubscriber
             $reader = new \Doctrine\Common\Annotations\AnnotationReader();
 
             \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace(
-                    'Arodax\\Doctrine\\Extensions\\Tree\\Mapping\\Annotation',
-                    __DIR__ . '/../src/'
-                );
+                'Arodax\\Doctrine\\Extensions\\Tree\\Mapping\\Annotation',
+                __DIR__ . '/../src/'
+            );
 
             if (class_exists(ArrayAdapter::class)) {
                 $reader = new PsrCachedReader($reader, new ArrayAdapter());
